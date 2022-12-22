@@ -1,0 +1,141 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap");
+html {
+  box-sizing: border-box;
+  min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Manrope";
+  background-image: url("../../assets/images/Ngaruroro.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+main {
+  background-color: #fff;
+  width: 90%;
+  max-width: 73.375rem;
+  padding: 2.6875rem 1.5rem;
+  margin: 3.625rem 0;
+  overflow: scroll;
+}
+
+@media screen and (min-width: 30rem) {
+  main {
+    padding: 2.6875rem 3.375rem;
+  }
+}
+input,
+button {
+  font: inherit;
+}
+
+.title__heading {
+  font-size: 2.5rem;
+  letter-spacing: 0.3em;
+}
+
+.title__description {
+  max-width: 33.25rem;
+  line-height: 1.6;
+  margin-top: 1.875rem;
+  margin-bottom: 3.375rem;
+}
+
+.city-input-container {
+  position: relative;
+}
+
+.city-input {
+  padding: 0.7em;
+  background-color: #EEEEEE;
+  border: none;
+}
+
+.input-submit {
+  padding: 0.7rem 1.9rem;
+  border: none;
+  background-color: #3F93B2;
+  font-size: 1rem;
+  color: #EEEEEE;
+  margin-left: -0.125rem;
+  cursor: pointer;
+}
+.input-submit:hover {
+  opacity: 0.6;
+}
+
+.city-compare-container {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: start;
+  margin: 3.375rem 0;
+  gap: 0.6875rem;
+}
+
+.weather-day-display,
+.weather-multi-day-display {
+  min-width: 40rem;
+  overflow-x: scroll;
+}
+
+.weather-day-display {
+  height: 8rem;
+  border: 0.0625rem solid #3F93B2;
+}
+
+.weather-multi-day-display {
+  display: flex;
+}
+
+.weather-city {
+  background-color: #3F93B2;
+  color: #fff;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  flex-grow: 1;
+}
+
+.weather-day {
+  display: grid;
+  place-items: center;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #3F93B2;
+  gap: 0.75rem;
+  flex-grow: 1;
+  cursor: pointer;
+}
+.weather-day:hover {
+  opacity: 0.6;
+}
+.weather-day:last-child {
+  border-right: 1px solid #3F93B2;
+}
+.weather-day + .weather-day {
+  border-left: 1px solid #3F93B2;
+}
+.weather-day .weather-day__name {
+  font-size: 0.9375rem;
+}
+.weather-day .weather-day__temp {
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=main.css.map */
