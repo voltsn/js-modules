@@ -31,14 +31,15 @@ main{
     background-color: #fff;
     width: 90%;
     max-width: 73.375rem;
+    // max-width: 24.4375rem;
     padding: 2.6875rem 1.5rem;
-    margin: 3.625rem 0;
     overflow: scroll;
 }
 
 @media screen and (min-width: 30rem) {
     main{
         padding: 2.6875rem 3.375rem;
+        margin: 3.625rem 0;
     }
 }
 
@@ -61,13 +62,15 @@ button{
 }
 
 .city-input-container{
-    position: relative;
+    display: flex;
 }
 
 .city-input{
     padding: .7em;
     background-color: #EEEEEE;
     border: none;
+    width: 60%;
+    max-width: 13.25rem;
 }
 
 .input-submit{
@@ -94,10 +97,12 @@ button{
 }
 
 // Weather rules
+.weather-container{
+    overflow: scroll;
+}
 .weather-day-display,
 .weather-multi-day-display{
     min-width: 40rem;
-    overflow-x: scroll;
 }
 
 .weather-day-display{
