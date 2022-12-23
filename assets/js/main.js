@@ -128,7 +128,9 @@ function createView(city){
     }
 
     const multiDayDisplay = createMultiDayDisplay(dayCards, city);
-    if (userPref.preferences){
+
+    console.log(userPref.compare);
+    if (userPref.compare){
         multiDayView.appendChild(multiDayDisplay);
     }else{
         multiDayView.removeChild(multiDayView.lastChild);

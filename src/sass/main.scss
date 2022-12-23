@@ -107,6 +107,10 @@ img{
 .weather-day-display,
 .weather-multi-day-display{
     min-width: 40rem;
+
+    & + &{
+        margin-top: 3rem;
+    }
 }
 
 .weather-day-display{
