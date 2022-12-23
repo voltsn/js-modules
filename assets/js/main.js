@@ -114,7 +114,7 @@ function saveWeatherData(data, latestCity) {
 
 function createView(city){
     dayCards = [];
-    for (let i = 0; i < weather[city].length - 2; i++){
+    for (let i = 0; i < weather[city].length - 3; i++){
         let avgTemp = getAvgDayTemp(city, i);
         let iconType = weather[city][i][0].weather[0].icon;
 
