@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  font-family: "Manrope";
+  font-family: "Manrope", sans-serif;
   background-image: url("../../assets/images/Ngaruroro.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -40,6 +40,11 @@ main {
 input,
 button {
   font: inherit;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
 }
 
 .title__heading {
@@ -114,7 +119,7 @@ button {
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  flex-grow: 1;
+  flex-basis: 5rem;
 }
 
 .weather-day {
@@ -123,6 +128,7 @@ button {
   font-size: 0.9375rem;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #3F93B2;
+  border-top: 1px solid #3F93B2;
   gap: 0.75rem;
   flex-grow: 1;
   cursor: pointer;
@@ -136,11 +142,16 @@ button {
 .weather-day + .weather-day {
   border-left: 1px solid #3F93B2;
 }
-.weather-day .weather-day__name {
+.weather-day .weather-day__heading {
   font-size: 0.9375rem;
+  text-align: center;
 }
 .weather-day .weather-day__temp {
   font-weight: 700;
+}
+.weather-day .wheater-day__icon {
+  width: 25px;
+  height: 25px;
 }
 
 /*# sourceMappingURL=main.css.map */
