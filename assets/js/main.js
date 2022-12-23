@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 submitBtn.addEventListener("click", handleSubmit);
 inputField.addEventListener("keypress", (e) => {
-    if (e.code === "Enter"){
+    if (e.code === "Enter" && inputField.value !== ""){
         handleSubmit();
     }
 })
@@ -34,6 +34,9 @@ compareOption.addEventListener("change", (event) => {
 
 async function handleSubmit() {
     const cityName = inputField.value;
+    if (cityName === ""){
+        return;
+    }
 
     userPref.latestCity = inputField.value;
     localStorage.setItem("userPref", JSON.stringify(userPref));
@@ -58,7 +61,6 @@ async function handleSubmit() {
     // Fetch the weather data of the city.
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=39b9071f8eb967a7f7549a4f9377bf50`);
     const data = await response.json();
-
 
     // Saves weather data in local storage.
     saveWeatherData(data);
