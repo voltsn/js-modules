@@ -23,9 +23,8 @@ inputField.addEventListener("keypress", (e) => {
 })
 
 compareOption.addEventListener("change", (event) => {
-   userPref.compare = userPref.compare ? false : true;
-
-   localStorage.setItem("userPref", JSON.stringify(userPref));
+    userPref.compare = event.target.checked;
+    localStorage.setItem("userPref", JSON.stringify(userPref));
 });
 
 async function handleSubmit() {
