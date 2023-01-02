@@ -38,24 +38,25 @@ async function handleSubmit() {
 
     // Clear input field
     inputField.value = "";
+
+    let data;
     
     // Check if data already exists
-    if (localStorage.getItem("weatherData")) {
-        const localData = JSON.parse(localStorage.getItem("weatherData"));
-        createView(localData);
-        console.log("hi");
-        return;
+    if (localStorage.getItem(cityName)) {
+        data = JSON.parse(localStorage.getItem(cityName));
+
+    } else {
+        // Fetch the weather data of the city
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=39b9071f8eb967a7f7549a4f9377bf50`);
+        data = await response.json();
+
+        // Save weather data in local storage
+        saveWeatherData(data, cityName);
     }
 
-    // Fetch the weather data of the city.
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=39b9071f8eb967a7f7549a4f9377bf50`);
-    const data = await response.json();
-
-    // Saves weather data in local storage.
-    saveWeatherData(data);
-
     // Display view to user
-    // createView(cityName);
+    const view = createView(data);
+    displayWeather(view, weekView);
 }
 
 
@@ -70,52 +71,42 @@ function displayWeather(multiDayView, weekView) {
     weekView.appendChild(multiDayView);
 }
 
-
-// Checks local storage for existing data returns a json object if found
-// otherwise null
-function loadData() {
-    if (localStorage.getItem("weatherData")) {
-        const localData = JSON.parse(localStorage.getItem("weatherData"));
-        for (let city of localData){
-            
-            if (city.city.name === cityName){
-                console.log("Already exists");
-                formatData(city);
-                createView(cityName);
-                return;
-            }
-        }
-    }
-}
-
-function saveWeatherData(data) {
-    localStorage.setItem("weatherData", JSON.stringify(data));
+function saveWeatherData(data, cityName) {
+    localStorage.setItem(cityName, JSON.stringify(data));
 }
 
 function createView(data){
-    dayCards = [];
+    const dayCards = [];
+    const cityInfo = `${data.city.name}, ${data.city.country}`;
     console.log(data.list);
-    // dayTemps = [];
-    // for (let i = 1; i < data.list.length; i++){
-        // let avgTemp = getAvgDayTemp(city, i);
-        // let iconType = weather[city][i][0].weather[0].icon;
+    for (let i = 0; i < data.list.length; i++){
+        const currentDate = data.list[i].dt_txt.split(" ")[0];
 
-        // let date = new Date(weather[city][i][0].dt_txt.split(" ")[0]);
-        // date = date.toLocaleDateString("en-Gb",{"weekday": "short", "day": "2-digit"});
+        let iconType = data.list[i].weather[0].icon;
+        let date = new Date(currentDate);
+        
+        let avgDayTemp = 0;
+        for (let j = i; j < data.list.length - 1; j++) {
+            const nextDate = data.list[j + 1].dt_txt.split(" ")[0];
+            
+            avgDayTemp += data.list[j].main.temp;
+            if (currentDate != nextDate) {
+                avgDayTemp = Math.floor(avgDayTemp / (j - i));
 
-        // let dayCard = createDayCard(date, iconType, avgTemp, city, i);
-        // dayCards.push(dayCard);
-    // }
+                date = date.toLocaleDateString("en-Gb",{"weekday": "short", "day": "2-digit"});
+                dayCards.push(createDayCard(date, iconType, avgDayTemp));
+                i = j;
+                break;
+            }
+        }
+    }
 
-    // const multiDayCardView = createMultiDayCardView(dayCards, city);
-    // return multiDayCardView;
+    return createMultiDayCardDisplay(dayCards, cityInfo);
 }
 
-function createDayCard(date, iconType, temparture, city, dayIndex) {
+function createDayCard(date, iconType, temparture) {
     const article = document.createElement("article");
     article.classList.add("weather-day");
-    article.dataset.index = dayIndex;
-    article.dataset.city = city;
 
     const heading = document.createElement("h3");
     heading.classList.add("weather-day__heading");
@@ -137,7 +128,7 @@ function createDayCard(date, iconType, temparture, city, dayIndex) {
     return article;
 }
 
-function createMultiDayCardView(dayCards, cityInfo) {
+function createMultiDayCardDisplay(dayCards, cityInfo) {
     const container = document.createElement("div");
     container.classList.add("weather-multi-day-display");
     
@@ -151,14 +142,4 @@ function createMultiDayCardView(dayCards, cityInfo) {
     }
 
     return container;
-}
-
-function getAvgDayTemp(city, day) {
-    const temps = weather[city][day];
-    let avg = 0;
-    for (let t of temps){
-        avg += t.main.temp;
-    }
-
-    return Math.floor(avg / temps.length);
 }
