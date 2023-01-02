@@ -14,7 +14,7 @@ html {
 
 body {
   font-family: "Manrope", sans-serif;
-  background-image: url("../../assets/images/Ngaruroro.svg");
+  background-image: url("./../images/Ngaruroro.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

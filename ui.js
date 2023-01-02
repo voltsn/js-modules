@@ -60,7 +60,7 @@ function createDayCard(date, iconType, temparture) {
     heading.appendChild(document.createTextNode(date));
 
     const icon = document.createElement("img");
-    icon.src = `assets/icons/${iconType}.png`;
+    icon.src = `./icons/${iconType}.png`;
     icon.alt = "weather icon";
     icon.classList.add("wheater-day__icon");
 
