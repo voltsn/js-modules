@@ -1,12 +1,8 @@
 const submitBtn = document.querySelector("#input-submit");
 const inputField = document.querySelector("#city-input");
 const compareOption = document.querySelector("#compare");
-const multiDayView = document.querySelector(".weather-container");
+const weekView = document.querySelector(".weather-container");
 
-// An object where a key is the name of the city, and its value
-// is an array of objects where each object contains weather data 
-// for a given day, index 0 is today, index 1 tommorow...
-const weather = {};
 const userPref = {compare: false, latestCity:""};
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -47,15 +43,9 @@ async function handleSubmit() {
     // Check if data already exists
     if (localStorage.getItem("weatherData")) {
         const localData = JSON.parse(localStorage.getItem("weatherData"));
-        for (let city of localData){
-            
-            if (city.city.name === cityName){
-                console.log("Already exists");
-                formatData(city);
-                createView(cityName);
-                return;
-            }
-        }
+        createView(localData);
+        console.log("hi");
+        return;
     }
 
     // Fetch the weather data of the city.
@@ -64,31 +54,23 @@ async function handleSubmit() {
 
     // Saves weather data in local storage.
     saveWeatherData(data);
-    
-    // format the data to make it easier to work with
-    formatData(data);
 
     // Display view to user
-    createView(cityName);
+    // createView(cityName);
 }
 
-function formatData(data){
-    const temps = [];
-    for (let i = 0; i < data.list.length - 1; i++){
-        let date = data.list[i].dt_txt.split(" ")[0];
-        const arr = [];
-        for (let j = i; j < data.list.length; j++){            
-            let nextDate =  data.list[j].dt_txt.split(" ")[0];
-            if (nextDate !== date){
-                i = j;
-                break;
-            }
-            arr.push(data.list[j]);
-        }
-        temps.push(arr);
+
+// Displays the weather prediction of the next 5 days in the ui.
+// If the compare option is disabled the container is emptied before
+// adding the new view.
+function displayWeather(multiDayView, weekView) {
+    if (!userPref.compare){
+        weekView.innerHTML = "";
     }
-    weather[data.city.name] = temps;
+    
+    weekView.appendChild(multiDayView);
 }
+
 
 // Checks local storage for existing data returns a json object if found
 // otherwise null
@@ -107,35 +89,27 @@ function loadData() {
     }
 }
 
-function saveWeatherData(data, latestCity) {
-    //  Sets localData to an empty array if the localStorage is empty
-    const localData = JSON.parse(localStorage.getItem("agify")) || [];
-    localData.push(data);
-    localStorage.setItem("weatherData", JSON.stringify(localData));
+function saveWeatherData(data) {
+    localStorage.setItem("weatherData", JSON.stringify(data));
 }
 
-function createView(city){
+function createView(data){
     dayCards = [];
-    for (let i = 0; i < weather[city].length - 3; i++){
-        let avgTemp = getAvgDayTemp(city, i);
-        let iconType = weather[city][i][0].weather[0].icon;
+    console.log(data.list);
+    // dayTemps = [];
+    // for (let i = 1; i < data.list.length; i++){
+        // let avgTemp = getAvgDayTemp(city, i);
+        // let iconType = weather[city][i][0].weather[0].icon;
 
-        let date = new Date(weather[city][i][0].dt_txt.split(" ")[0]);
-        date = date.toLocaleDateString("en-Gb",{"weekday": "short", "day": "2-digit"});
+        // let date = new Date(weather[city][i][0].dt_txt.split(" ")[0]);
+        // date = date.toLocaleDateString("en-Gb",{"weekday": "short", "day": "2-digit"});
 
-        let dayCard = createDayCard(date, iconType, avgTemp, city, i);
-        dayCards.push(dayCard);
-    }
+        // let dayCard = createDayCard(date, iconType, avgTemp, city, i);
+        // dayCards.push(dayCard);
+    // }
 
-    const multiDayDisplay = createMultiDayDisplay(dayCards, city);
-
-    console.log(userPref.compare);
-    if (userPref.compare){
-        multiDayView.appendChild(multiDayDisplay);
-    }else{
-        multiDayView.removeChild(multiDayView.lastChild);
-        multiDayView.appendChild(multiDayDisplay);
-    }
+    // const multiDayCardView = createMultiDayCardView(dayCards, city);
+    // return multiDayCardView;
 }
 
 function createDayCard(date, iconType, temparture, city, dayIndex) {
@@ -164,7 +138,7 @@ function createDayCard(date, iconType, temparture, city, dayIndex) {
     return article;
 }
 
-function createMultiDayDisplay(dayCards, cityInfo) {
+function createMultiDayCardView(dayCards, cityInfo) {
     const container = document.createElement("div");
     container.classList.add("weather-multi-day-display");
     
