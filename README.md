@@ -2,6 +2,8 @@
 This repo contains a refactored version of my weather app.
 the original version can be found [here](https://github.com/voltsn/weather-app).
 
+![](./screenshot.png)
+
 # What's new
 I split the javasctript code in two files `ui.js` and `index.js`.
 - `ui.js` contains all of the logic needed to manipulate the dom. The
