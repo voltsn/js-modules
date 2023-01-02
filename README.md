@@ -4,7 +4,7 @@ the original version can be found [here](https://github.com/voltsn/weather-app).
 
 ![](./screenshot.png)
 
-# What's new
+# What's new ?
 I split the javasctript code in two files `ui.js` and `index.js`.
 - `ui.js` contains all of the logic needed to manipulate the dom. The
    core functions are exported in order to be used in `index.js`:
