@@ -4,6 +4,7 @@ const submitBtn = document.querySelector("#input-submit");
 const inputField = document.querySelector("#city-input");
 const compareOption = document.querySelector("#compare");
 const weekView = document.querySelector(".weather-container");
+const api_key = import.meta.env.VITE_API_KEY;
 
 const userPref = {compare: false, latestCity:""};
 
@@ -49,7 +50,7 @@ async function handleSubmit() {
 
     } else {
         // Fetch the weather data of the city
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=39b9071f8eb967a7f7549a4f9377bf50`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${api_key}`);
         data = await response.json();
 
         // Save weather data in local storage
