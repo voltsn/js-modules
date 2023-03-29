@@ -1,10 +1,10 @@
-# Weather App v2
-This repo contains a refactored version of my weather app.
+# Weather App 
+An app that allows users to check the weather prediction for a given city. 
 You can view the app in action [here](https://spontaneous-tartufo-6a966e.netlify.app/).
 
 ![](./screenshot.png)
 
-# What's new ?
+# Implementation
 I split the javascript code in two files `ui.js` and `index.js`.
 - `ui.js` contains all of the logic needed to manipulate the dom. The
    core functions are exported in order to be used in `index.js`:
