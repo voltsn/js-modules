@@ -1,6 +1,6 @@
 # Weather App v2
 This repo contains a refactored version of my weather app.
-the original version can be found [here](https://github.com/voltsn/weather-app).
+You can view the app in action [here](https://spontaneous-tartufo-6a966e.netlify.app/).
 
 ![](./screenshot.png)
 
