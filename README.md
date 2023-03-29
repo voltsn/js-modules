@@ -33,4 +33,4 @@ I split the javascript code in two files `ui.js` and `index.js`.
    ```
 - `index.js` serves as the main file, it is the one that will be used in the HTML. it makes use of `ui.js` by importing its exported functions: `import {displayWeather, createView} from "./ui.js";`.
 
-In addition to these changes the project now makes use of [Vite](https://vitejs.dev/) a javascript bundler.
+In addition, the project makes use of [Vite](https://vitejs.dev/) a javascript bundler.
