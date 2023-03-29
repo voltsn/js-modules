@@ -1,3 +1,3 @@
 export default {
-    base: "/weather-app-v2/",
+    base: "/",
 }
