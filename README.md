@@ -5,7 +5,7 @@ You can view the app in action [here](https://spontaneous-tartufo-6a966e.netlify
 ![](./screenshot.png)
 
 # What's new ?
-I split the javasctript code in two files `ui.js` and `index.js`.
+I split the javascript code in two files `ui.js` and `index.js`.
 - `ui.js` contains all of the logic needed to manipulate the dom. The
    core functions are exported in order to be used in `index.js`:
    ```javascript
